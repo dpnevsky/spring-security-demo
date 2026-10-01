@@ -18,7 +18,7 @@
         Year of birth error </div>
     <br/>
     <label for="password">Enter the password:</label>
-    <input type="text" th:field="*{password}" id="password"/>
+    <input type="password" name="password" id="password" autocomplete="new-password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
         Password error </div>
     <br/>

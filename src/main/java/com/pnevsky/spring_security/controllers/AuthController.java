@@ -1,6 +1,6 @@
 package com.pnevsky.spring_security.controllers;
 
-import com.pnevsky.spring_security.models.Person;
+import com.pnevsky.spring_security.dto.RegistrationForm;
 import com.pnevsky.spring_security.services.RegistrationService;
 import com.pnevsky.spring_security.util.PersonValidator;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,8 @@ import javax.validation.Valid;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private PersonValidator personValidator;
-    private RegistrationService registrationService;
+    private final PersonValidator personValidator;
+    private final RegistrationService registrationService;
 
     public AuthController(PersonValidator personValidator, RegistrationService registrationService) {
         this.personValidator = personValidator;
@@ -30,17 +30,17 @@ public class AuthController {
     }
 
     @GetMapping("/registration")
-    public String registrationPage(@ModelAttribute("person") Person person){
+    public String registrationPage(@ModelAttribute("person") RegistrationForm person){
         return "auth/registration";
     }
 
     @PostMapping("/registration")
-    public String performRegistration(@ModelAttribute("person") @Valid Person person,
+    public String performRegistration(@ModelAttribute("person") @Valid RegistrationForm person,
                                       BindingResult bindingResult){
         personValidator.validate(person, bindingResult);
 
         if (bindingResult.hasErrors())
-            return "/auth/registration";
+            return "auth/registration";
 
         registrationService.register(person);
 

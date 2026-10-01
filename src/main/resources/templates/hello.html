@@ -7,6 +7,12 @@
 <body>
 
 <h1>Hello World!</h1>
+<div th:if="${username != null}">
+    <p>Пользователь: <span th:text="${username}"></span></p>
+    <p>Роль: <span th:text="${role}"></span></p>
+</div>
+<p><a th:href="@{/showUserInfo}">Информация о пользователе</a></p>
+<p><a th:href="@{/admin}">Страница администратора</a></p>
 <br/>
 <form th:method="POST" th:action="@{/logout}">
     <input type="submit" value="Logout">

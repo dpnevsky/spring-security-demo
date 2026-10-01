@@ -7,20 +7,20 @@ import javax.persistence.*;
 @Table(name = "Person")
 public class Person {
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false, unique = true, length = 50)
     private String username;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "year_of_birth")
-    int yearOfBirth;
+    @Column(name = "year_of_birth", nullable = false)
+    private int yearOfBirth;
 
-    @Column(name = "role")
-    String role;
+    @Column(name = "role", nullable = false, length = 20)
+    private String role;
 
 
     public Person() {
@@ -75,7 +75,6 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", id=" + id +
                 ", yearOfBirth=" + yearOfBirth +
                 '}';
